@@ -22,7 +22,7 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 // Connection to MangoDB =>
-// const mongo_url = "mongodb://127.0.0.1:27017/wanderLust";
+const mongo_url = "mongodb://127.0.0.1:27017/wanderLust";
 
 // Connection to Mango Atlas for Deployment =>
 const dbUrl = process.env.ATLASDB_URL;
@@ -34,7 +34,7 @@ main().then(() =>{
     console.log(err);
 });
 async function main() {
-    await mongoose.connect(dbUrl);   
+    await mongoose.connect(mongo_url);   
 }
 
 
@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 // connection for mongo atlas using npm connect-mongo =>
     const store = MongoStore.create({
-        mongoUrl: dbUrl,
+        mongoUrl: mongo_url,
         crypto: {
             secret: process.env.SECRET 
         },

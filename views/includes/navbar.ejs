@@ -13,10 +13,33 @@
     display: inline;
     margin-right: 0.5rem;
   }
-  .search-inp {
+  /* .search-inp {
     border-radius: 25px;
     padding: 0.5rem 3rem 0.5rem 3rem;
     font-size: 1rem;
+  } */
+
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    .search-inp {
+      width: 100%;
+    }
+    .search-btn {
+      width: 100%;
+      margin-top: 5px;
+    }
+     /* Ensure the mobile menu has a solid background */
+     .navbar-collapse {
+      background-color: white; /* Solid white background */
+      padding: 1rem; /* Add some padding for better spacing */
+      border-radius: 10px; /* Optional: Add rounded corners */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow */
+    }
   }
 </style>
 
@@ -38,9 +61,9 @@
           <a class="nav-link" href="/listings">Explore</a>
         </div>
 
-        <div class="navbar-nav ms-auto">
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 search-inp" type="search" placeholder="Search Destinations">
+        <div class="navbar-nav ms-auto w-100">
+          <form class="d-flex w-100 flex-column flex-md-row" role="search">
+            <input class="form-control search-inp me-md-2" type="search" placeholder="Search Destinations">
             <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
           </form>
         </div>

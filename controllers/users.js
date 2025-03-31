@@ -45,4 +45,4 @@ module.exports.signup  = async (req, res)=>{
           req.flash("success", "You are logged out!");
           res.redirect("/listings");
         })
-};
+}; 
