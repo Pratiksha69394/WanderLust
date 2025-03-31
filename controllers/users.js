@@ -42,6 +42,7 @@ module.exports.signup  = async (req, res)=>{
           if(err){
             return next(err);
           }
+          console.log("User logged in:", req.user); // Debugging
           req.flash("success", "You are logged out!");
           res.redirect("/listings");
         })

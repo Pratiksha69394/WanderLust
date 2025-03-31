@@ -25,7 +25,7 @@ const userRouter = require("./routes/user.js");
 const mongo_url = "mongodb://127.0.0.1:27017/wanderLust";
 
 // Connection to Mango Atlas for Deployment =>
-const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/wanderLust";
 
 
 main().then(() =>{
@@ -34,7 +34,7 @@ main().then(() =>{
     console.log(err);
 });
 async function main() {
-    await mongoose.connect(mongo_url);   
+    await mongoose.connect(dbUrl);   
 }
 
 
@@ -47,14 +47,14 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 // connection for mongo atlas using npm connect-mongo =>
     const store = MongoStore.create({
-        mongoUrl: mongo_url,
+        mongoUrl: dbUrl,
         crypto: {
             secret: process.env.SECRET 
         },
         touchAfter: 24 * 3600,
     });
 
-store.on("error", () =>{
+store.on("error", (err) =>{
     console.log("ERROR in MONGO_SESSION STORE", err);
 });
 
@@ -97,7 +97,8 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) =>{
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
-    res.locals.currUser = req.user;
+    console.log("Current User:", req.user); // Debugging
+    res.locals.currUser = req.user || null;
     next();
 });
 
