@@ -25,7 +25,7 @@ const userRouter = require("./routes/user.js");
 const mongo_url = "mongodb://127.0.0.1:27017/wanderLust";
 
 // Connection to Mango Atlas for Deployment =>
-const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/wanderLust";
+const dbUrl = process.env.ATLASDB_URL;
 
 
 main().then(() =>{
@@ -73,13 +73,6 @@ const sessionOptions = {
 
 
 
-// Root Router =>
-    // app.get("/", (req, res) =>{
-    //     res.send("Hii, I am root");
-    // });
-
-/********************************************************************************************** */
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -89,9 +82,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-// app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
-/********************************************************************************************************/ 
 
 // Flash Middleware =>
 app.use((req, res, next) =>{
@@ -102,16 +93,6 @@ app.use((req, res, next) =>{
     next();
 });
 
-// Demo User =>
-// app.get("/demouser", async(req, res) =>{
-//     let fakeUser = new User({
-//         email: "student@gmail.com",
-//         username: "sigma-student"
-//     });
-
-//     let registeredUser = await User.register(fakeUser, "helloworld");
-//     res.send(registeredUser);
-// });
 
 // Express Router =>
 app.use("/listings", listingRouter);
